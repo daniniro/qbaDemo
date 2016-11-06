@@ -3,6 +3,8 @@ package com.beren.qbademo.services.impl;
 import static org.junit.Assert.assertThat;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
 
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -11,11 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.beren.qbademo.QbaDemoApplication;
 import com.beren.qbademo.rest.dtos.MailSearchDTO;
+import com.beren.qbademo.services.ServiceConfig;
+import com.beren.qbademo.testconfigurations.DbConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { QbaDemoApplication.class })
+@ContextConfiguration(classes = { DbConfig.class, ServiceConfig.class, SpringDataMailSearchService.class })
 public class SpringDataMailSearchServiceIT {
 
 	private static final String FROM = "mail@mail.com";
@@ -29,16 +32,16 @@ public class SpringDataMailSearchServiceIT {
 	@Test
 	public void happyPath() throws Exception {
 		MailSearchDTO dto = givenDto();
-		assertThat(searchService.search(dto), Matchers.hasSize(Matchers.greaterThan(0)));
+		assertThat(searchService.search(dto), Matchers.hasSize(1));
 	}
 
 	private MailSearchDTO givenDto() throws ParseException {
 		MailSearchDTO dto = new MailSearchDTO();
-		// dto.setFrom(FROM);
-		// dto.setTo(Arrays.asList(TO));
+		dto.setFrom(FROM);
+		dto.setTo(Arrays.asList(TO));
 		dto.setSubject(SUBJECT);
-		// dto.setDateFrom(new SimpleDateFormat("yyyy-MM-dd").parse(MAIL_DATE));
-		// dto.setBody(BODY);
+		dto.setDateFrom(new SimpleDateFormat("yyyy-MM-dd").parse(MAIL_DATE));
+		dto.setBody(BODY);
 		return dto;
 	}
 

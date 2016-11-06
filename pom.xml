@@ -23,6 +23,8 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<qba.version>1.0-SNAPSHOT</qba.version>
+		<findbugsVersion>3.0.1</findbugsVersion>
+		<failsafeVersion>2.18.1</failsafeVersion>
 	</properties>
 
 	<dependencies>

@@ -22,24 +22,27 @@ public class Mail {
 	private String bcc;
 	private String subject;
 	private String body;
-	private String message;
 	private Date dateInsert;
 
+	protected Mail() {
+		super();
+	}
+
 	public Mail(String from, String to, String bcc, String subject, String body, String message, Date dateInsert) {
+		this();
 		this.from = from;
 		this.to = to;
 		this.bcc = bcc;
 		this.subject = subject;
 		this.body = body;
-		this.message = message;
-		this.dateInsert = dateInsert;
+		this.dateInsert = new Date(dateInsert.getTime());
 
 	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
-	@Column(name = "ID_MAIL_SUBMISSION")
+	@Column(name = "ID_MAIL")
 	public Long getId() {
 		return id;
 	}
@@ -53,15 +56,10 @@ public class Mail {
 		return this.from;
 	}
 
-	@Column(name = "MESSAGE", nullable = true)
-	public String getMessage() {
-		return this.message;
-	}
-
 	@Temporal(value = TemporalType.TIMESTAMP)
 	@Column(name = "DATE_INSERT", nullable = false)
 	public Date getDateInsert() {
-		return this.dateInsert;
+		return new Date(this.dateInsert.getTime());
 	}
 
 	@Column(name = "SUBJECT", nullable = true)
@@ -102,10 +100,6 @@ public class Mail {
 
 	protected void setBody(String body) {
 		this.body = body;
-	}
-
-	protected void setMessage(String message) {
-		this.message = message;
 	}
 
 	protected void setDateInsert(Date dateInsert) {

@@ -49,12 +49,12 @@ public class MailSearchDTO {
 	}
 
 	public void setDateFrom(Date dateFrom) {
-		this.dateFrom = dateFrom;
+		this.dateFrom = new Date(dateFrom.getTime());
 
 	}
 
 	public void setDateTo(Date dateTo) {
-		this.dateTo = dateTo;
+		this.dateTo = new Date(dateTo.getTime());
 
 	}
 
@@ -72,11 +72,11 @@ public class MailSearchDTO {
 	}
 
 	public Date getDateFrom() {
-		return dateFrom;
+		return new Date(dateFrom.getTime());
 	}
 
 	public Date getDateTo() {
-		return dateTo;
+		return new Date(dateTo.getTime());
 	}
 
 	public String getBody() {
