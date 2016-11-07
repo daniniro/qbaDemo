@@ -4,7 +4,6 @@ import static org.junit.Assert.assertThat;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -38,7 +37,7 @@ public class SpringDataMailSearchServiceIT {
 	private MailSearchDTO givenDto() throws ParseException {
 		MailSearchDTO dto = new MailSearchDTO();
 		dto.setFrom(FROM);
-		dto.setTo(Arrays.asList(TO));
+		dto.setTo(TO);
 		dto.setSubject(SUBJECT);
 		dto.setDateFrom(new SimpleDateFormat("yyyy-MM-dd").parse(MAIL_DATE));
 		dto.setBody(BODY);

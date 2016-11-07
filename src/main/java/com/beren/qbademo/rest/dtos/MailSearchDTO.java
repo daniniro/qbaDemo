@@ -1,7 +1,10 @@
 package com.beren.qbademo.rest.dtos;
 
 import java.util.Date;
-import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.beren.qba.annotations.QueryContains;
 import com.beren.qba.annotations.QueryEq;
@@ -20,11 +23,13 @@ public class MailSearchDTO {
 	@QueryEq("from")
 	private String from;
 	@QueryOneOf("to")
-	private List<String> to;
+	private String[] to;
 	@QueryStartsWith("subject")
 	private String subject;
+	@DateTimeFormat(iso = ISO.DATE)
 	@QueryGreaterThan(value = "dateInsert", isInclusive = true)
 	private Date dateFrom;
+	@DateTimeFormat(iso = ISO.DATE)
 	@QueryLessThan(value = "dateInsert", isInclusive = true)
 	private Date dateTo;
 	@QueryContains(value = "body", ignoreCase = true)
@@ -35,35 +40,39 @@ public class MailSearchDTO {
 	}
 
 	public void setFrom(String from) {
-		this.from = from;
+		this.from = StringUtils.trimToNull(from);
 	}
 
-	public void setTo(List<String> to) {
-		this.to = to;
+	public void setTo(String[] to) {
+		if (to != null && to.length > 0)
+			this.to = to;
 
 	}
 
 	public void setSubject(String subject) {
-		this.subject = subject;
+		this.subject = StringUtils.trimToNull(subject);
 
 	}
 
 	public void setDateFrom(Date dateFrom) {
-		this.dateFrom = new Date(dateFrom.getTime());
+		if (dateFrom != null)
+			this.dateFrom = new Date(dateFrom.getTime());
 
 	}
 
 	public void setDateTo(Date dateTo) {
-		this.dateTo = new Date(dateTo.getTime());
+		if (dateTo != null) {
+			this.dateTo = new Date(dateTo.getTime());
+		}
 
 	}
 
 	public void setBody(String body) {
-		this.body = body;
+		this.body = StringUtils.trimToNull(body);
 
 	}
 
-	public List<String> getTo() {
+	public String[] getTo() {
 		return to;
 	}
 

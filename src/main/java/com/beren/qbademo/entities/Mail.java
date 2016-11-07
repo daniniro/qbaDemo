@@ -56,7 +56,7 @@ public class Mail {
 		return this.from;
 	}
 
-	@Temporal(value = TemporalType.TIMESTAMP)
+	@Temporal(value = TemporalType.DATE)
 	@Column(name = "DATE_INSERT", nullable = false)
 	public Date getDateInsert() {
 		return new Date(this.dateInsert.getTime());

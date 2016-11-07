@@ -12,6 +12,7 @@ import com.beren.qbademo.entities.QMail;
 import com.beren.qbademo.rest.dtos.MailSearchDTO;
 import com.beren.qbademo.services.MailSearchService;
 import com.google.common.collect.Lists;
+import com.querydsl.core.types.Predicate;
 
 @Service
 public class SpringDataMailSearchService implements MailSearchService {
@@ -27,8 +28,7 @@ public class SpringDataMailSearchService implements MailSearchService {
 
 	@Override
 	public List<Mail> search(MailSearchDTO dto) {
-		return Lists.newArrayList(repository
-				.findAll(queryGenerator.createQuery(dto, queryGenerator.getEntityPath(QMail.mail.toString()))));
+		return Lists.newArrayList(repository.findAll(queryGenerator.createQuery(dto, queryGenerator.getEntityPath(QMail.mail.toString()))));
 
 	}
 
