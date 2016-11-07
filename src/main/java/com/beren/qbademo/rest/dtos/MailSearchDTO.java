@@ -1,5 +1,6 @@
 package com.beren.qbademo.rest.dtos;
 
+import java.util.Arrays;
 import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
@@ -45,7 +46,7 @@ public class MailSearchDTO {
 
 	public void setTo(String[] to) {
 		if (to != null && to.length > 0)
-			this.to = to;
+			this.to = Arrays.copyOf(to, to.length);
 
 	}
 
@@ -73,7 +74,7 @@ public class MailSearchDTO {
 	}
 
 	public String[] getTo() {
-		return to;
+		return Arrays.copyOf(to, to.length);
 	}
 
 	public String getSubject() {
